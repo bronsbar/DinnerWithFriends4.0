@@ -15,11 +15,18 @@ class itemListTableViewController: UITableViewController {
     var managedContext : NSManagedObjectContext!
     var results: [DinnerItem] = []
     var itemSelected : String = ""
+    var dinner : Dinner?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let itemListFetch : NSFetchRequest<DinnerItem> = DinnerItem.fetchRequest()
+        itemListFetch.predicate = NSPredicate(format: "name != nil")
+        do {
+        results = try managedContext.fetch(itemListFetch)
+        } catch let error as NSError {
+            print ("Fetch error: \(error) description \(error.userInfo)")
+        }
     
 
         // Uncomment the following line to preserve selection between presentations
@@ -46,15 +53,15 @@ class itemListTableViewController: UITableViewController {
         return results.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dinnerItemCell", for: indexPath)
 
         // Configure the cell...
-
+        cell.textLabel?.text = results[indexPath.row].name
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -91,14 +98,25 @@ class itemListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "addItemDetailSegue" {
+            let destinationVC = segue.destination as? UINavigationController
+            let dinnerItemDetailVC = destinationVC?.topViewController as? DinnerItemDetailTableViewController
+            dinnerItemDetailVC?.managedContext = managedContext
+            dinnerItemDetailVC?.title = itemSelected
+            dinnerItemDetailVC?.itemSelected = itemSelected
+            
+        }
     }
-    */
+    
+    @IBAction func unwindFromDinnerItemDetail(segue: UIStoryboardSegue) {
+        
+    }
+    
 
 }

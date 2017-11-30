@@ -12,7 +12,18 @@ import CoreData
 class DinnerItemDetailTableViewController: UITableViewController {
     
     var managedContext : NSManagedObjectContext!
-
+    var item : DinnerItem?
+    var itemSelected : String = ""
+    
+    // MARK: - Outlets
+    @IBOutlet weak var pictureLabel: UIImageView!
+    @IBOutlet weak var nameLabel: UITextField!
+    @IBOutlet weak var categoryLabel: UITextField!
+    @IBOutlet weak var urlLabel: UITextField!
+    @IBOutlet weak var ratingLabel: UITextField!
+    @IBOutlet weak var notesLabel: UITextView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,16 +41,7 @@ class DinnerItemDetailTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
+  
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -85,14 +87,23 @@ class DinnerItemDetailTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "saveDinnerItemSegue" {
+            let dinnerItem = DinnerItem(context: managedContext)
+            dinnerItem.name = nameLabel.text!
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print ("Save error: \(error), description: \(error.userInfo)")
+            }
+        }
     }
-    */
+
 
 }

@@ -14,7 +14,7 @@
         <!--Dinners-->
         <scene sceneID="ZsO-3L-ZeU">
             <objects>
-                <tableViewController id="g1u-Be-Ahy" customClass="DinnerTableViewController" customModule="DinnerWithFriends3_0" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="g1u-Be-Ahy" customClass="DinnerTableViewController" customModule="DinnerWithFriends4_0" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WYG-xX-6np">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +72,7 @@
         <!--Dinner Detail-->
         <scene sceneID="xbo-9n-foi">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="qP4-L9-jX2" customClass="DinnerDetailTableViewController" customModule="DinnerWithFriends3_0" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="qP4-L9-jX2" customClass="DinnerDetailTableViewController" customModule="DinnerWithFriends4_0" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HPd-T2-vzw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -362,13 +362,13 @@
         <!--Root View Controller-->
         <scene sceneID="kKP-ai-2Ot">
             <objects>
-                <tableViewController id="CEb-qT-jHT" customClass="itemListTableViewController" customModule="DinnerWithFriends3_0" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="CEb-qT-jHT" customClass="itemListTableViewController" customModule="DinnerWithFriends4_0" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WET-NL-OpG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="3Ql-ns-hVs" detailTextLabel="aI2-a0-b8M" imageView="X2t-to-MZ9" style="IBUITableViewCellStyleSubtitle" id="Bxe-qB-wHJ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dinnerItemCell" textLabel="3Ql-ns-hVs" detailTextLabel="aI2-a0-b8M" imageView="X2t-to-MZ9" style="IBUITableViewCellStyleSubtitle" id="Bxe-qB-wHJ">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bxe-qB-wHJ" id="O9A-Lj-VZW">
@@ -407,7 +407,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="Npn-Kg-i55">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="7nH-uv-9Th"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SOY-sy-IEE"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SOY-sy-IEE">
+                            <connections>
+                                <segue destination="ITE-Cs-D0j" kind="presentation" identifier="addItemDetailSegue" id="EPQ-at-Kik"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Px-l5-ljW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -612,9 +616,25 @@
                             <outlet property="delegate" destination="Ltj-Dw-fo0" id="ZZO-3N-HxV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="jmo-mW-1QT"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="jmo-mW-1QT">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jxe-6C-Pfq"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gvu-sC-SgQ">
+                            <connections>
+                                <segue destination="hsE-J9-4Pl" kind="unwind" identifier="saveDinnerItemSegue" unwindAction="unwindFromDinnerItemDetailWithSegue:" id="E3z-E7-Ybq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="categoryLabel" destination="FVf-Gq-etc" id="ydW-cO-4Ef"/>
+                        <outlet property="nameLabel" destination="S40-XX-YRT" id="Zlp-TL-Old"/>
+                        <outlet property="notesLabel" destination="RLD-uL-XRt" id="ypV-GN-s06"/>
+                        <outlet property="pictureLabel" destination="QMc-MH-aj2" id="Gf9-n3-H7l"/>
+                        <outlet property="ratingLabel" destination="MrX-og-e2u" id="tRc-L9-ozq"/>
+                        <outlet property="urlLabel" destination="i3m-lQ-Ygd" id="fEn-ij-RZ4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tVk-BF-ZFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="hsE-J9-4Pl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="6466" y="-111"/>
         </scene>
@@ -707,5 +727,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="srT-G2-SqW"/>
+        <segue reference="EPQ-at-Kik"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,7 +13,7 @@ class DinnerDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     var managedContext : NSManagedObjectContext!
-    var dinner : Dinner!
+    var dinner : Dinner?
     var categories :[String] = ["Starter","Main Course","Dessert","Apperitive","White Wine","Red Wine"]
     var categorySelected = ""
     
@@ -136,6 +136,9 @@ class DinnerDetailTableViewController: UITableViewController {
             endVc.managedContext = managedContext
             // pass categorySelected to itemSelected
             endVc.itemSelected = categorySelected
+            // pass dinner to itemListTableViewController
+            endVc.dinner = dinner
+            
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.

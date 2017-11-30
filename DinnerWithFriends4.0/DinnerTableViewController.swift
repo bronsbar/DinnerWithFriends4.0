@@ -147,6 +147,11 @@ class DinnerTableViewController: UITableViewController {
     }
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "dinnerAdd" {
+            let destinationVC = segue.destination as? UINavigationController
+            let dinnerDetailVC = destinationVC?.topViewController as? DinnerDetailTableViewController
+            dinnerDetailVC?.managedContext = managedContext
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

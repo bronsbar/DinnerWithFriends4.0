@@ -21,8 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Propagate managedContext
         guard let navController = window?.rootViewController?.childViewControllers[0] as? UINavigationController,
-            let viewController = navController.topViewController as? DinnerTableViewController else {return true}
+            let viewController = navController.topViewController as? DinnerTableViewController
+        else {return true}
         viewController.managedContext = coreDataStack.managedContext
+        viewController.title = "my title"
         return true
     }
 

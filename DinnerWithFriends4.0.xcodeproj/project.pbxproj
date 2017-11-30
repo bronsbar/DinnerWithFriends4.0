@@ -81,7 +81,6 @@
 				44B3520B1FD0100600AEF6F3 /* AppDelegate.swift */,
 				44B3520D1FD0100600AEF6F3 /* ViewController.swift */,
 				44B3520F1FD0100600AEF6F3 /* Main.storyboard */,
-				44B352301FD0154D00AEF6F3 /* DinnerItemDetailTableViewController.swift */,
 				44B352151FD0100600AEF6F3 /* Assets.xcassets */,
 				44B352171FD0100600AEF6F3 /* LaunchScreen.storyboard */,
 				44B3521A1FD0100600AEF6F3 /* Info.plist */,
@@ -89,6 +88,7 @@
 				44B352201FD0112200AEF6F3 /* DinnerTableViewController.swift */,
 				44B352221FD0112C00AEF6F3 /* DinnerDetailTableViewController.swift */,
 				44B352241FD0113900AEF6F3 /* itemListTableViewController.swift */,
+				44B352301FD0154D00AEF6F3 /* DinnerItemDetailTableViewController.swift */,
 				44B352261FD0113F00AEF6F3 /* CoreDataStack.swift */,
 			);
 			path = DinnerWithFriends4.0;
