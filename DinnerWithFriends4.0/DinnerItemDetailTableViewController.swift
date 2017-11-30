@@ -95,13 +95,24 @@ class DinnerItemDetailTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "saveDinnerItemSegue" {
-            let dinnerItem = DinnerItem(context: managedContext)
-            dinnerItem.name = nameLabel.text!
+            item = DinnerItem(context: managedContext)
+            item?.name = nameLabel.text!
+            switch itemSelected {
+            case "Starter" : item?.category = "Starter"
+            case "Main Course" : item?.category = "Main Course"
+            case "Dessert" : item?.category = "Dessert"
+            case "Apperitive" : item?.category = "Apperitive"
+            case "Red Wine" : item?.category = "Red Wine"
+            case "White Wine" : item?.category = "White Wine"
+            default : break
+            }
             do {
                 try managedContext.save()
             } catch let error as NSError {
                 print ("Save error: \(error), description: \(error.userInfo)")
             }
+            let destinationVC = segue.destination as! itemListTableViewController
+            destinationVC.results.append(item!)
         }
     }
 

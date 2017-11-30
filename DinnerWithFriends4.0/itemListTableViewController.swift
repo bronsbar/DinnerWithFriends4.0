@@ -16,12 +16,13 @@ class itemListTableViewController: UITableViewController {
     var results: [DinnerItem] = []
     var itemSelected : String = ""
     var dinner : Dinner?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let itemListFetch : NSFetchRequest<DinnerItem> = DinnerItem.fetchRequest()
-        itemListFetch.predicate = NSPredicate(format: "name != nil")
+        itemListFetch.predicate = NSPredicate(format: "%K = %@", argumentArray: [#keyPath(DinnerItem.category), itemSelected])
+
         do {
         results = try managedContext.fetch(itemListFetch)
         } catch let error as NSError {
@@ -59,6 +60,7 @@ class itemListTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.textLabel?.text = results[indexPath.row].name
+        cell.detailTextLabel?.text = String(results[indexPath.row].rating)
         return cell
     }
     
@@ -115,6 +117,8 @@ class itemListTableViewController: UITableViewController {
     }
     
     @IBAction func unwindFromDinnerItemDetail(segue: UIStoryboardSegue) {
+        
+        tableView.reloadData()
         
     }
     
