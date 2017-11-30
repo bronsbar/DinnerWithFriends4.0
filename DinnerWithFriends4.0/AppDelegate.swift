@@ -13,10 +13,16 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    lazy var coreDataStack = CoreDataStack(modelName: "DinnerWithFriends4_0")
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Propagate managedContext
+        guard let navController = window?.rootViewController?.childViewControllers[0] as? UINavigationController,
+            let viewController = navController.topViewController as? DinnerTableViewController else {return true}
+        viewController.managedContext = coreDataStack.managedContext
         return true
     }
 
