@@ -138,10 +138,10 @@ class DinnerDetailTableViewController: UITableViewController {
             endVc.itemSelected = categorySelected
             // pass dinner to itemListTableViewController
             endVc.dinner = dinner
-            
-        }
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+                }
+            }
+    @IBAction func unwindFromitemListTableViewController (segue: UIStoryboardSegue) {
+        // do nothing for the time being
     }
 
     @IBAction func textEditingChanged (_ sender: UITextField) {

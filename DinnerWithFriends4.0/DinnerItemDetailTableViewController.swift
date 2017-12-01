@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DinnerItemDetailTableViewController: UITableViewController {
+class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var managedContext : NSManagedObjectContext!
     var item : DinnerItem?
@@ -22,10 +22,48 @@ class DinnerItemDetailTableViewController: UITableViewController {
     @IBOutlet weak var urlLabel: UITextField!
     @IBOutlet weak var ratingLabel: UITextField!
     @IBOutlet weak var notesLabel: UITextView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    @IBAction func textEditingChanged (_ sender: UITextField) {
+        updateSaveButtonStatus()
+    }
+    // Select a picture
+    @IBAction func pictureTapped(_ sender: Any) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        let alertController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: {action in
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
+            })
+            alertController.addAction(cameraAction)
+        }
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let photoLibraryAction = UIAlertAction(title: "photo library", style: .default, handler: {action in imagePicker.sourceType = .photoLibrary
+                self.present(imagePicker, animated: true
+                    , completion: nil)
+            })
+            alertController.addAction(photoLibraryAction)
+        }
+        present(alertController, animated: true, completion: nil)
+    }
+   
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            pictureLabel.image = selectedImage
+            dismiss(animated: true, completion: nil)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Preload the category
+        categoryLabel.text = itemSelected
+        // Update SaveButton status
+        updateSaveButtonStatus()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -106,6 +144,11 @@ class DinnerItemDetailTableViewController: UITableViewController {
             case "White Wine" : item?.category = "White Wine"
             default : break
             }
+            // prepare image for storing
+            if let picture = pictureLabel.image {
+                let pictureData = UIImagePNGRepresentation(picture)
+                item?.picture = pictureData as NSData?
+            }
             do {
                 try managedContext.save()
             } catch let error as NSError {
@@ -115,6 +158,14 @@ class DinnerItemDetailTableViewController: UITableViewController {
             destinationVC.results.append(item!)
         }
     }
+}
 
-
+// MARK - Helper functions
+extension DinnerItemDetailTableViewController {
+    func updateSaveButtonStatus () {
+        let nameText = nameLabel.text ?? ""
+        let categoryText = categoryLabel.text ?? ""
+        saveButton.isEnabled = !nameText.isEmpty && !categoryText.isEmpty
+        
+    }
 }

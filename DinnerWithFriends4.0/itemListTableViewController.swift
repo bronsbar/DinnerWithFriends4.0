@@ -59,8 +59,13 @@ class itemListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "dinnerItemCell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = results[indexPath.row].name
-        cell.detailTextLabel?.text = String(results[indexPath.row].rating)
+        let indexResult = results[indexPath.row]
+        cell.textLabel?.text = indexResult.name
+        cell.detailTextLabel?.text = String(indexResult.rating)
+        if let imageData = indexResult.picture {
+            let image = UIImage(data: imageData as Data)
+            cell.imageView?.image = image!
+        }
         return cell
     }
     

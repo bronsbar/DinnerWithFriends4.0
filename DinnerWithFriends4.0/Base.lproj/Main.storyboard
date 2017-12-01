@@ -406,7 +406,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="Npn-Kg-i55">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="7nH-uv-9Th"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="7nH-uv-9Th">
+                            <connections>
+                                <segue destination="OAJ-gu-jRm" kind="unwind" unwindAction="unwindFromitemListTableViewControllerWithSegue:" id="Cmh-7l-LwU"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SOY-sy-IEE">
                             <connections>
                                 <segue destination="ITE-Cs-D0j" kind="presentation" identifier="addItemDetailSegue" id="EPQ-at-Kik"/>
@@ -415,6 +419,7 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Px-l5-ljW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="OAJ-gu-jRm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5010" y="-112"/>
         </scene>
@@ -436,8 +441,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QMc-MH-aj2">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Picture" translatesAutoresizingMaskIntoConstraints="NO" id="QMc-MH-aj2">
                                                     <rect key="frame" x="112.5" y="25" width="150" height="150"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="QMc-MH-aj2" secondAttribute="height" multiplier="1:1" id="Xhw-Lk-jTS"/>
                                                         <constraint firstAttribute="width" constant="150" id="pQt-T7-2xI"/>
@@ -449,6 +455,10 @@
                                                 <constraint firstItem="QMc-MH-aj2" firstAttribute="centerX" secondItem="OUk-wt-zQB" secondAttribute="centerX" id="T4Y-Vi-zeE"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="ril-4X-GFM" appends="YES" id="OuB-1J-5ls"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="HG7-nR-A6Y">
                                         <rect key="frame" x="0.0" y="200" width="375" height="44"/>
@@ -471,6 +481,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="Ltj-Dw-fo0" eventType="editingChanged" id="keN-g7-PDu"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -505,6 +518,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="Ltj-Dw-fo0" eventType="editingDidEnd" id="vpH-9A-MKC"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -630,11 +646,17 @@
                         <outlet property="notesLabel" destination="RLD-uL-XRt" id="ypV-GN-s06"/>
                         <outlet property="pictureLabel" destination="QMc-MH-aj2" id="Gf9-n3-H7l"/>
                         <outlet property="ratingLabel" destination="MrX-og-e2u" id="tRc-L9-ozq"/>
+                        <outlet property="saveButton" destination="gvu-sC-SgQ" id="iiD-5r-cMx"/>
                         <outlet property="urlLabel" destination="i3m-lQ-Ygd" id="fEn-ij-RZ4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tVk-BF-ZFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hsE-J9-4Pl" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="ril-4X-GFM">
+                    <connections>
+                        <action selector="pictureTapped:" destination="Ltj-Dw-fo0" id="GyU-Om-yjz"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="6466" y="-111"/>
         </scene>
