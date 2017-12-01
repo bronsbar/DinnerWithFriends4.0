@@ -33,6 +33,7 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
         imagePicker.delegate = self
         let alertController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: {action in
                 imagePicker.sourceType = .camera
@@ -62,6 +63,28 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
         
         // Preload the category
         categoryLabel.text = itemSelected
+        // set the title
+        self.title = itemSelected
+        // load the picure
+        if let pictureNSData = item?.picture {
+            let pictureData = pictureNSData as Data
+            let picture = UIImage(data: pictureData)
+            pictureLabel.image = picture
+        }
+        // load name
+        nameLabel.text = item?.name
+        // load url
+        if let url = item?.url {
+            let urlString = try! String(contentsOf: url)
+            urlLabel.text = urlString
+        }
+        if let rating = item?.rating {
+            ratingLabel.text = String(rating)
+        }
+        if let notes = item?.notes {
+            notesLabel.text = notes
+        }
+        
         // Update SaveButton status
         updateSaveButtonStatus()
 

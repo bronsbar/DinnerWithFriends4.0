@@ -368,11 +368,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dinnerItemCell" textLabel="3Ql-ns-hVs" detailTextLabel="aI2-a0-b8M" imageView="X2t-to-MZ9" style="IBUITableViewCellStyleSubtitle" id="Bxe-qB-wHJ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="dinnerItemCell" textLabel="3Ql-ns-hVs" detailTextLabel="aI2-a0-b8M" imageView="X2t-to-MZ9" style="IBUITableViewCellStyleSubtitle" id="Bxe-qB-wHJ">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bxe-qB-wHJ" id="O9A-Lj-VZW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Ql-ns-hVs">
@@ -389,7 +389,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="No Picture" id="X2t-to-MZ9">
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="No Picture" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="X2t-to-MZ9">
                                             <rect key="frame" x="16" y="0.0" width="44" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
@@ -633,7 +633,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="jmo-mW-1QT">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jxe-6C-Pfq"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jxe-6C-Pfq">
+                            <connections>
+                                <segue destination="hsE-J9-4Pl" kind="unwind" unwindAction="unwindFromDinnerItemDetailWithSegue:" id="MRa-fl-Scd"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="gvu-sC-SgQ">
                             <connections>
                                 <segue destination="hsE-J9-4Pl" kind="unwind" identifier="saveDinnerItemSegue" unwindAction="unwindFromDinnerItemDetailWithSegue:" id="E3z-E7-Ybq"/>
@@ -749,6 +753,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="srT-G2-SqW"/>
-        <segue reference="EPQ-at-Kik"/>
+        <segue reference="KOm-Vc-rvO"/>
     </inferredMetricsTieBreakers>
 </document>

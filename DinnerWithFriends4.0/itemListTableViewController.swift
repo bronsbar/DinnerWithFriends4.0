@@ -16,6 +16,7 @@ class itemListTableViewController: UITableViewController {
     var results: [DinnerItem] = []
     var itemSelected : String = ""
     var dinner : Dinner?
+    var selectedIndexPath = IndexPath()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,10 @@ class itemListTableViewController: UITableViewController {
         }
         return cell
     }
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        selectedIndexPath = indexPath
+        performSegue(withIdentifier: "itemDetailSegue", sender: nil)
+    }
     
 
     /*
@@ -111,13 +116,16 @@ class itemListTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        let destinationVC = segue.destination as? UINavigationController
+        let dinnerItemDetailVC = destinationVC?.topViewController as? DinnerItemDetailTableViewController
+        dinnerItemDetailVC?.managedContext = managedContext
+        dinnerItemDetailVC?.itemSelected = itemSelected
         if segue.identifier == "addItemDetailSegue" {
-            let destinationVC = segue.destination as? UINavigationController
-            let dinnerItemDetailVC = destinationVC?.topViewController as? DinnerItemDetailTableViewController
-            dinnerItemDetailVC?.managedContext = managedContext
-            dinnerItemDetailVC?.title = itemSelected
-            dinnerItemDetailVC?.itemSelected = itemSelected
+            // setup if item added
             
+        }
+        if segue.identifier == "itemDetailSegue" {
+            dinnerItemDetailVC?.item = results[selectedIndexPath.row]
         }
     }
     
