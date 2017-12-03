@@ -14,13 +14,15 @@ class itemListTableViewController: UITableViewController {
     
     var managedContext : NSManagedObjectContext!
     var results: [DinnerItem] = []
+    var filteredResults :[DinnerItem] = []
     var itemSelected : String = ""
     var dinner : Dinner?
     var selectedIndexPath = IndexPath()
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupSearchController()
         let itemListFetch : NSFetchRequest<DinnerItem> = DinnerItem.fetchRequest()
         itemListFetch.predicate = NSPredicate(format: "%K = %@", argumentArray: [#keyPath(DinnerItem.category), itemSelected])
 
@@ -29,6 +31,10 @@ class itemListTableViewController: UITableViewController {
         } catch let error as NSError {
             print ("Fetch error: \(error) description \(error.userInfo)")
         }
+        
+        tableView.allowsMultipleSelection = true
+        
+        
     
 
         // Uncomment the following line to preserve selection between presentations
@@ -51,7 +57,9 @@ class itemListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if isFiltering() {
+            return filteredResults.count
+        }
         return results.count
     }
 
@@ -60,9 +68,15 @@ class itemListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "dinnerItemCell", for: indexPath)
 
         // Configure the cell...
-        let indexResult = results[indexPath.row]
-        cell.textLabel?.text = indexResult.name
-        cell.detailTextLabel?.text = String(indexResult.rating)
+        let indexResult: DinnerItem
+        if isFiltering() {
+            indexResult = filteredResults[indexPath.row]
+        } else {
+            indexResult = results[indexPath.row]
+        }
+        
+        cell.textLabel!.text = indexResult.name
+        cell.detailTextLabel!.text = String(indexResult.rating)
         if let imageData = indexResult.picture {
             let image = UIImage(data: imageData as Data)
             cell.imageView?.image = image!
@@ -75,17 +89,17 @@ class itemListTableViewController: UITableViewController {
     }
     
 
-    /*
+/*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard let dinnerItemToRemove =
         if editingStyle == .delete {
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -109,10 +123,36 @@ class itemListTableViewController: UITableViewController {
         return true
     }
     */
-
+    // MARK - Private instance methods
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    func filterContentForSearchText(_ searchText: String, scope : String = "All") {
+        filteredResults = results.filter({(dinnerItem : DinnerItem) ->Bool in
+            guard let dinnerItemName = dinnerItem.name else {return false}
+            return dinnerItemName.lowercased().contains(searchText.lowercased())
+        })
+    tableView.reloadData()
+        
+    }
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search in \(itemSelected) Items"
+       
+        searchController.hidesNavigationBarDuringPresentation = false
+        navigationItem.searchController = searchController
+//        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+        
+    }
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -125,7 +165,11 @@ class itemListTableViewController: UITableViewController {
             
         }
         if segue.identifier == "itemDetailSegue" {
-            dinnerItemDetailVC?.item = results[selectedIndexPath.row]
+            if isFiltering(){
+                dinnerItemDetailVC?.item = filteredResults[selectedIndexPath.row]
+            } else {
+                dinnerItemDetailVC?.item = results[selectedIndexPath.row]
+            }
         }
     }
     
@@ -135,5 +179,15 @@ class itemListTableViewController: UITableViewController {
         
     }
     
-
+    
+}
+extension itemListTableViewController: UISearchResultsUpdating {
+    // MARK - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+}
+extension itemListTableViewController {
+   
 }

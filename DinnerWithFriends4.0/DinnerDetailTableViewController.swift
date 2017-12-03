@@ -130,12 +130,12 @@ class DinnerDetailTableViewController: UITableViewController {
         if segue.identifier == "itemListSegue" {
             let destinationVc = segue.destination as? UINavigationController
             let endVc = destinationVc?.topViewController as! itemListTableViewController
-            // set title
-            endVc.title = categorySelected
             // propagate the managedContxt
             endVc.managedContext = managedContext
             // pass categorySelected to itemSelected
             endVc.itemSelected = categorySelected
+            // set title
+            endVc.title = categorySelected
             // pass dinner to itemListTableViewController
             endVc.dinner = dinner
                 }

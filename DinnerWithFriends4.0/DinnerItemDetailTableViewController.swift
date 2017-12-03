@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import  SafariServices
 
 class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -65,24 +66,31 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
         categoryLabel.text = itemSelected
         // set the title
         self.title = itemSelected
+        
+        // if there is already an item, load its properties
+        if let existingItem = item {
         // load the picure
-        if let pictureNSData = item?.picture {
+        if let pictureNSData = existingItem.picture {
             let pictureData = pictureNSData as Data
             let picture = UIImage(data: pictureData)
             pictureLabel.image = picture
         }
         // load name
-        nameLabel.text = item?.name
+        nameLabel.text = existingItem.name
         // load url
-        if let url = item?.url {
-            let urlString = try! String(contentsOf: url)
+        if let url = existingItem.url {
+            let urlString = url.absoluteString
             urlLabel.text = urlString
         }
-        if let rating = item?.rating {
-            ratingLabel.text = String(rating)
-        }
-        if let notes = item?.notes {
+        let rating = existingItem.rating
+        ratingLabel.text = String(rating)
+    
+        if let notes = existingItem.notes {
             notesLabel.text = notes
+        }
+        } else {
+            // if not item exist, create one
+            item = DinnerItem(context: managedContext)
         }
         
         // Update SaveButton status
@@ -146,8 +154,23 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
         // Return false if you do not want the item to be re-orderable.
         return true
     }
-    */
-
+     */
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        // still to implement, check if buttonTapped is the right one
+        
+        if let url =  item?.url {
+            let safariController = SFSafariViewController(url: url)
+            safariController.delegate = self
+            present(safariController, animated: true, completion: nil)
+        } else {
+            let defaultUrlString = "https:www.google.com"
+            let defaultUrl = URL(string: defaultUrlString)
+            let safariController = SFSafariViewController(url: defaultUrl!)
+            safariController.delegate = self
+            present(safariController, animated: true, completion: nil)
+        }
+    }
+    
     
     // MARK: - Navigation
 
@@ -156,7 +179,6 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "saveDinnerItemSegue" {
-            item = DinnerItem(context: managedContext)
             item?.name = nameLabel.text!
             switch itemSelected {
             case "Starter" : item?.category = "Starter"
@@ -184,11 +206,22 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
 }
 
 // MARK - Helper functions
+// saveButton minimum need name and category before saveButton is active
 extension DinnerItemDetailTableViewController {
     func updateSaveButtonStatus () {
         let nameText = nameLabel.text ?? ""
         let categoryText = categoryLabel.text ?? ""
         saveButton.isEnabled = !nameText.isEmpty && !categoryText.isEmpty
         
+    }
+}
+// safariViewController delegate to capture action
+extension DinnerItemDetailTableViewController : SFSafariViewControllerDelegate {
+    func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
+        urlLabel.text = URL.absoluteString
+        item?.url = URL
+        // activity still to do
+        let a:[UIActivity] = []
+        return a
     }
 }
