@@ -23,15 +23,12 @@ class itemListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
-        let itemListFetch : NSFetchRequest<DinnerItem> = DinnerItem.fetchRequest()
-        itemListFetch.predicate = NSPredicate(format: "%K = %@", argumentArray: [#keyPath(DinnerItem.category), itemSelected])
-
-        do {
-        results = try managedContext.fetch(itemListFetch)
-        } catch let error as NSError {
-            print ("Fetch error: \(error) description \(error.userInfo)")
+        if let fetchedResults = fetchDinnerItems(){
+            self.results = fetchedResults
+        } else {
+            results = []
         }
-        
+        // setup tableview for multiple selection
         tableView.allowsMultipleSelection = true
         
         
@@ -40,8 +37,7 @@ class itemListTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        //self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,7 +85,6 @@ class itemListTableViewController: UITableViewController {
     }
     
 
-/*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
@@ -98,16 +93,30 @@ class itemListTableViewController: UITableViewController {
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        guard let dinnerItemToRemove =
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        var dinnerItemToRemove: DinnerItem?
+        if isFiltering() {
+            dinnerItemToRemove = filteredResults[indexPath.row]
+        } else  {
+            dinnerItemToRemove = results[indexPath.row]
+        }
+        guard editingStyle == .delete else { return}
+        managedContext.delete(dinnerItemToRemove!)
+        do {
+            try managedContext.save()
+           // tableView.deleteRows(at: [indexPath], with: .automatic)
+            if let fetchedResults = fetchDinnerItems() {
+                self.results = fetchedResults
+            } else { results = []
+                
+            }
+            searchController.searchBar.text = ""
+            tableView.reloadData()
+        } catch let error as NSError {
+            print ("saving error : \(error), description : \(error.userInfo)")
+            
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -149,6 +158,18 @@ class itemListTableViewController: UITableViewController {
         definesPresentationContext = true
         
     }
+    func fetchDinnerItems() -> [DinnerItem]? {
+        let itemListFetch : NSFetchRequest<DinnerItem> = DinnerItem.fetchRequest()
+        itemListFetch.predicate = NSPredicate(format: "%K = %@", argumentArray: [#keyPath(DinnerItem.category), itemSelected])
+        
+        do {
+            results = try managedContext.fetch(itemListFetch)
+        } catch let error as NSError {
+            print ("Fetch error: \(error) description \(error.userInfo)")
+            return nil
+        }
+        return results
+    }
     
     
     // MARK: - Navigation
@@ -161,7 +182,8 @@ class itemListTableViewController: UITableViewController {
         dinnerItemDetailVC?.managedContext = managedContext
         dinnerItemDetailVC?.itemSelected = itemSelected
         if segue.identifier == "addItemDetailSegue" {
-            // setup if item added
+            // setup if new item added
+            dinnerItemDetailVC?.newItem = true
             
         }
         if segue.identifier == "itemDetailSegue" {
@@ -189,5 +211,6 @@ extension itemListTableViewController: UISearchResultsUpdating {
     
 }
 extension itemListTableViewController {
+    
    
 }

@@ -15,6 +15,7 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
     var managedContext : NSManagedObjectContext!
     var item : DinnerItem?
     var itemSelected : String = ""
+    var newItem : Bool = false // becomes true if user wants to create a new DinnerItem
     
     // MARK: - Outlets
     @IBOutlet weak var pictureLabel: UIImageView!
@@ -157,12 +158,13 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
      */
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         // still to implement, check if buttonTapped is the right one
-        
+        // if there is an item with an url, call safari with the url
         if let url =  item?.url {
             let safariController = SFSafariViewController(url: url)
             safariController.delegate = self
             present(safariController, animated: true, completion: nil)
         } else {
+            // if there is no item with an url, call google.com
             let defaultUrlString = "https:www.google.com"
             let defaultUrl = URL(string: defaultUrlString)
             let safariController = SFSafariViewController(url: defaultUrl!)
@@ -194,13 +196,23 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
                 let pictureData = UIImagePNGRepresentation(picture)
                 item?.picture = pictureData as NSData?
             }
+            // store rating
+            if let rating =  ratingLabel.text {
+                item?.rating = Int16(rating)!
+            }
+            // store notes
+            if let notes = notesLabel.text {
+                item?.notes = notes
+            }
             do {
                 try managedContext.save()
             } catch let error as NSError {
                 print ("Save error: \(error), description: \(error.userInfo)")
             }
             let destinationVC = segue.destination as! itemListTableViewController
-            destinationVC.results.append(item!)
+            if newItem {
+                destinationVC.results.append(item!)
+            }
         }
     }
 }
