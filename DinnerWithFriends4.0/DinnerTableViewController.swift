@@ -84,7 +84,7 @@ class DinnerTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DinnerCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DinnerCell", for: indexPath) as! DinnerTableViewCell
 
         // Configure the cell...
         let dinner = dinners[indexPath.row] 
@@ -92,13 +92,15 @@ class DinnerTableViewController: UITableViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .none
         dateFormatter.dateStyle = .short
-        cell.textLabel?.text = dateFormatter.string(from: dinnerDate!)
-        let dinnerRating = dinner.rating
+        cell.dinnerDateLabel.text = dateFormatter.string(from: dinnerDate!)
+      //  let dinnerRating = dinner.rating
        
-        cell.detailTextLabel?.text = String(dinnerRating)
+       // cell. text = String(dinnerRating)
         
         let imageData = dinner.picture as Data?
-        cell.imageView?.image = UIImage(data: imageData!)
+        cell.dinnerPicture.image = UIImage(data: imageData!)
+        cell.dinnerPicture.layer.cornerRadius = cell.dinnerPicture.frame.height / 2
+        cell.dinnerViewLabel.layer.cornerRadius = cell.dinnerViewLabel.frame.height / 2
 
         return cell
     }
