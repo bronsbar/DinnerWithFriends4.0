@@ -22,6 +22,7 @@
 		44B3522E1FD0134100AEF6F3 /* DinnerItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3522A1FD0134100AEF6F3 /* DinnerItem+CoreDataClass.swift */; };
 		44B3522F1FD0134100AEF6F3 /* DinnerItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3522B1FD0134100AEF6F3 /* DinnerItem+CoreDataProperties.swift */; };
 		44B352311FD0154D00AEF6F3 /* DinnerItemDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B352301FD0154D00AEF6F3 /* DinnerItemDetailTableViewController.swift */; };
+		C9C1490A1FDD39BB007532D7 /* DinnerItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C149091FDD39BB007532D7 /* DinnerItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		44B3522A1FD0134100AEF6F3 /* DinnerItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DinnerItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		44B3522B1FD0134100AEF6F3 /* DinnerItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DinnerItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		44B352301FD0154D00AEF6F3 /* DinnerItemDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinnerItemDetailTableViewController.swift; sourceTree = "<group>"; };
+		C9C149091FDD39BB007532D7 /* DinnerItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinnerItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				44B3520B1FD0100600AEF6F3 /* AppDelegate.swift */,
 				44B3520D1FD0100600AEF6F3 /* ViewController.swift */,
 				44B3520F1FD0100600AEF6F3 /* Main.storyboard */,
+				C9C149091FDD39BB007532D7 /* DinnerItemTableViewCell.swift */,
 				44B352151FD0100600AEF6F3 /* Assets.xcassets */,
 				44B352171FD0100600AEF6F3 /* LaunchScreen.storyboard */,
 				44B3521A1FD0100600AEF6F3 /* Info.plist */,
@@ -166,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9C1490A1FDD39BB007532D7 /* DinnerItemTableViewCell.swift in Sources */,
 				44B352271FD0113F00AEF6F3 /* CoreDataStack.swift in Sources */,
 				44B3522C1FD0134100AEF6F3 /* Dinner+CoreDataClass.swift in Sources */,
 				44B3522D1FD0134100AEF6F3 /* Dinner+CoreDataProperties.swift in Sources */,

@@ -75,6 +75,7 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
             let pictureData = pictureNSData as Data
             let picture = UIImage(data: pictureData)
             pictureLabel.image = picture
+            pictureLabel.layer.cornerRadius = pictureLabel.frame.height / 2
         }
         // load name
         nameLabel.text = existingItem.name

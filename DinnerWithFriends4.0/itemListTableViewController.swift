@@ -29,7 +29,12 @@ class itemListTableViewController: UITableViewController {
             results = []
         }
         // setup tableview for multiple selection
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.allowsMultipleSelection = true
+        tableView.reloadData()
+        
+        
         
         
     
@@ -58,10 +63,14 @@ class itemListTableViewController: UITableViewController {
         }
         return results.count
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "dinnerItemCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dinnerItemCell", for: indexPath) as! DinnerItemTableViewCell
 
         // Configure the cell...
         let indexResult: DinnerItem
@@ -70,13 +79,18 @@ class itemListTableViewController: UITableViewController {
         } else {
             indexResult = results[indexPath.row]
         }
+        cell.itemView.layer.cornerRadius = cell.itemView.frame.height / 2
         
-        cell.textLabel!.text = indexResult.name
-        cell.detailTextLabel!.text = String(indexResult.rating)
+        cell.itemNameLabel.text = indexResult.name
+        cell.itemRatingLabel.text = String(indexResult.rating)
         if let imageData = indexResult.picture {
             let image = UIImage(data: imageData as Data)
-            cell.imageView?.image = image!
+            
+            cell.itemPicture.image = image!
+            cell.itemPicture.layer.cornerRadius = (cell.itemPicture.frame.height) / 2
+            
         }
+       
         return cell
     }
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
