@@ -65,7 +65,7 @@ class itemListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 100
     }
 
     
@@ -93,10 +93,16 @@ class itemListTableViewController: UITableViewController {
        
         return cell
     }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        selectedIndexPath = indexPath
+//        performSegue(withIdentifier: "itemDetailSegue", sender: nil)
+//    }
+    
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         selectedIndexPath = indexPath
         performSegue(withIdentifier: "itemDetailSegue", sender: nil)
     }
+    
     
 
     // Override to support conditional editing of the table view.
@@ -201,6 +207,7 @@ class itemListTableViewController: UITableViewController {
             
         }
         if segue.identifier == "itemDetailSegue" {
+            
             if isFiltering(){
                 dinnerItemDetailVC?.item = filteredResults[selectedIndexPath.row]
             } else {
