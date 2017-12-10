@@ -23,6 +23,7 @@
 		44B3522F1FD0134100AEF6F3 /* DinnerItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3522B1FD0134100AEF6F3 /* DinnerItem+CoreDataProperties.swift */; };
 		44B352311FD0154D00AEF6F3 /* DinnerItemDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B352301FD0154D00AEF6F3 /* DinnerItemDetailTableViewController.swift */; };
 		C9C1490A1FDD39BB007532D7 /* DinnerItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C149091FDD39BB007532D7 /* DinnerItemTableViewCell.swift */; };
+		CCAC9E9A1FDD852B00B3C217 /* DinnerItemTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAC9E991FDD852B00B3C217 /* DinnerItemTableViewCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		44B3522B1FD0134100AEF6F3 /* DinnerItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DinnerItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		44B352301FD0154D00AEF6F3 /* DinnerItemDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinnerItemDetailTableViewController.swift; sourceTree = "<group>"; };
 		C9C149091FDD39BB007532D7 /* DinnerItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinnerItemTableViewCell.swift; sourceTree = "<group>"; };
+		CCAC9E991FDD852B00B3C217 /* DinnerItemTableViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DinnerItemTableViewCellDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				44B3520B1FD0100600AEF6F3 /* AppDelegate.swift */,
 				44B3520D1FD0100600AEF6F3 /* ViewController.swift */,
 				44B3520F1FD0100600AEF6F3 /* Main.storyboard */,
+				CCAC9E991FDD852B00B3C217 /* DinnerItemTableViewCellDelegate.swift */,
 				C9C149091FDD39BB007532D7 /* DinnerItemTableViewCell.swift */,
 				44B352151FD0100600AEF6F3 /* Assets.xcassets */,
 				44B352171FD0100600AEF6F3 /* LaunchScreen.storyboard */,
@@ -176,6 +179,7 @@
 				44B3520E1FD0100600AEF6F3 /* ViewController.swift in Sources */,
 				44B352211FD0112200AEF6F3 /* DinnerTableViewController.swift in Sources */,
 				44B352251FD0113900AEF6F3 /* itemListTableViewController.swift in Sources */,
+				CCAC9E9A1FDD852B00B3C217 /* DinnerItemTableViewCellDelegate.swift in Sources */,
 				44B3522E1FD0134100AEF6F3 /* DinnerItem+CoreDataClass.swift in Sources */,
 				44B3520C1FD0100600AEF6F3 /* AppDelegate.swift in Sources */,
 				44B352141FD0100600AEF6F3 /* DinnerWithFriends4_0.xcdatamodeld in Sources */,

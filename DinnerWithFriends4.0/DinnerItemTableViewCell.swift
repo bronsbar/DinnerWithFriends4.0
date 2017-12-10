@@ -17,6 +17,12 @@ class DinnerItemTableViewCell: UITableViewCell {
     @IBOutlet weak var itemView: UIView!
     @IBOutlet weak var itemDetailButton: UIButton!
     
+    weak var delegate: DinnerItemTableViewCellDelegate?
+    
+    @IBAction func detailTapped(_ sender: UIButton) {
+        // call the tableViewCellDidTapDetail method on the delegate
+        delegate?.tableViewCellDidTapDetail(self)
+    }
     
     
     override func awakeFromNib() {

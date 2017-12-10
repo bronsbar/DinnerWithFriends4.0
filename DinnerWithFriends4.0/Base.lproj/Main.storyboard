@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vV4-5T-sP9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vV4-5T-sP9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -385,15 +385,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="dinnerItemCell" rowHeight="80" id="Bxe-qB-wHJ" customClass="DinnerItemTableViewCell" customModule="DinnerWithFriends4_0" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="dinnerItemCell" rowHeight="80" id="Bxe-qB-wHJ" customClass="DinnerItemTableViewCell" customModule="DinnerWithFriends4_0" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bxe-qB-wHJ" id="O9A-Lj-VZW">
-                                    <rect key="frame" x="0.0" y="0.0" width="307" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vbk-OG-ofp">
-                                            <rect key="frame" x="10" y="5" width="287" height="70"/>
+                                            <rect key="frame" x="10" y="5" width="355" height="70"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cXh-SM-Onu">
                                                     <rect key="frame" x="0.0" y="-5" width="80" height="80"/>
@@ -402,35 +402,44 @@
                                                         <constraint firstAttribute="width" constant="80" id="yuV-nH-ArG"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="aCH-vb-c8B">
-                                                    <rect key="frame" x="85" y="10" width="51.5" height="50"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="aCH-vb-c8B">
+                                                    <rect key="frame" x="85" y="10" width="238" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrQ-bV-dis">
-                                                            <rect key="frame" x="0.0" y="0.0" width="51.5" height="16.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="238" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I66-Ru-sMz">
-                                                            <rect key="frame" x="0.0" y="16.5" width="51.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="17.5" width="238" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgq-Kf-NRf">
-                                                            <rect key="frame" x="0.0" y="33.5" width="51.5" height="16.5"/>
+                                                            <rect key="frame" x="0.0" y="35.5" width="238" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2X-sI-kd5">
+                                                    <rect key="frame" x="328" y="24" width="22" height="22"/>
+                                                    <connections>
+                                                        <action selector="detailTapped:" destination="Bxe-qB-wHJ" eventType="touchUpInside" id="bWh-zT-n4a"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="cXh-SM-Onu" firstAttribute="leading" secondItem="Vbk-OG-ofp" secondAttribute="leading" id="02R-fW-l7g"/>
                                                 <constraint firstItem="aCH-vb-c8B" firstAttribute="leading" secondItem="cXh-SM-Onu" secondAttribute="trailing" constant="5" id="DIA-Wu-NQ4"/>
                                                 <constraint firstAttribute="bottom" secondItem="aCH-vb-c8B" secondAttribute="bottom" constant="10" id="EyZ-Ai-bwf"/>
+                                                <constraint firstAttribute="trailing" secondItem="u2X-sI-kd5" secondAttribute="trailing" constant="5" id="JAj-Mx-hiU"/>
+                                                <constraint firstItem="u2X-sI-kd5" firstAttribute="leading" secondItem="aCH-vb-c8B" secondAttribute="trailing" constant="5" id="MEZ-7O-gtq"/>
+                                                <constraint firstItem="u2X-sI-kd5" firstAttribute="centerY" secondItem="Vbk-OG-ofp" secondAttribute="centerY" id="mMi-1Q-l5F"/>
                                                 <constraint firstItem="aCH-vb-c8B" firstAttribute="top" secondItem="Vbk-OG-ofp" secondAttribute="top" constant="10" id="rzn-NF-Qwe"/>
                                                 <constraint firstItem="cXh-SM-Onu" firstAttribute="centerY" secondItem="Vbk-OG-ofp" secondAttribute="centerY" id="zw4-sY-8vO"/>
                                             </constraints>
@@ -444,11 +453,12 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="itemNameLabel" destination="DrQ-bV-dis" id="gIi-Xp-7un"/>
-                                    <outlet property="itemPicture" destination="cXh-SM-Onu" id="ucd-eE-4aZ"/>
-                                    <outlet property="itemRatingLabel" destination="wgq-Kf-NRf" id="Lsz-wp-lhG"/>
-                                    <outlet property="itemUrlLabel" destination="I66-Ru-sMz" id="Lcf-sy-AeP"/>
-                                    <outlet property="itemView" destination="Vbk-OG-ofp" id="Kz7-dY-SQs"/>
+                                    <outlet property="itemDetailButton" destination="u2X-sI-kd5" id="q5D-ZC-stx"/>
+                                    <outlet property="itemNameLabel" destination="DrQ-bV-dis" id="42Y-by-Uia"/>
+                                    <outlet property="itemPicture" destination="cXh-SM-Onu" id="Cvj-ED-hXu"/>
+                                    <outlet property="itemRatingLabel" destination="wgq-Kf-NRf" id="zH0-3j-7zx"/>
+                                    <outlet property="itemUrlLabel" destination="I66-Ru-sMz" id="cPO-w4-ICL"/>
+                                    <outlet property="itemView" destination="Vbk-OG-ofp" id="03I-mF-Cks"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

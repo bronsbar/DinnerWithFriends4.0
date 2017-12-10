@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class itemListTableViewController: UITableViewController {
+class itemListTableViewController: UITableViewController, DinnerItemTableViewCellDelegate {
     
     var managedContext : NSManagedObjectContext!
     var results: [DinnerItem] = []
@@ -65,12 +65,14 @@ class itemListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 90
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "dinnerItemCell", for: indexPath) as! DinnerItemTableViewCell
+        
+        cell.delegate = self
 
         // Configure the cell...
         let indexResult: DinnerItem
@@ -93,17 +95,12 @@ class itemListTableViewController: UITableViewController {
        
         return cell
     }
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        selectedIndexPath = indexPath
-//        performSegue(withIdentifier: "itemDetailSegue", sender: nil)
-//    }
-    
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        selectedIndexPath = indexPath
+    // Delegate func for DinnerItemTableViewCell, called when detailItem button is touched
+    func tableViewCellDidTapDetail (_ sender: DinnerItemTableViewCell) {
+        guard let tappedIndexPath = tableView.indexPath(for: sender) else {return}
+        selectedIndexPath = tappedIndexPath
         performSegue(withIdentifier: "itemDetailSegue", sender: nil)
     }
-    
-    
 
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
