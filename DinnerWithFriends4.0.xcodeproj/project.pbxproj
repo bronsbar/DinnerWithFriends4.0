@@ -84,9 +84,9 @@
 		44B3520A1FD0100600AEF6F3 /* DinnerWithFriends4.0 */ = {
 			isa = PBXGroup;
 			children = (
+				44B3520F1FD0100600AEF6F3 /* Main.storyboard */,
 				44B3520B1FD0100600AEF6F3 /* AppDelegate.swift */,
 				44B3520D1FD0100600AEF6F3 /* ViewController.swift */,
-				44B3520F1FD0100600AEF6F3 /* Main.storyboard */,
 				C974D7C31FDDC671004E2968 /* DinnerTableViewCell.swift */,
 				CCAC9E991FDD852B00B3C217 /* DinnerItemTableViewCellDelegate.swift */,
 				C9C149091FDD39BB007532D7 /* DinnerItemTableViewCell.swift */,

@@ -12,109 +12,47 @@ import CoreData
 class DinnerDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
+    
     var managedContext : NSManagedObjectContext!
-    var dinner : Dinner?
-    var categories :[String] = ["Starter","Main Course","Dessert","Apperitive","White Wine","Red Wine"]
-    var categorySelected = ""
+    private var dinner : Dinner?
+    private var categories :[String] = ["Starter","Main Course","Dessert","Apperitive","White Wine","Red Wine"]
+    private var categorySelected = ""
     
-    @IBOutlet weak var friendsLabel: UITextField!
+    @IBOutlet private weak var friendsLabel: UITextField!
+    @IBOutlet private weak var dateLabel: UITextField!
+    @IBOutlet private weak var starterLabel: UITextField!
+    @IBOutlet private weak var mainLabel: UITextField!
+    @IBOutlet private weak var dessertLabel: UITextField!
+    @IBOutlet private weak var appertiveLabel: UITextField!
+    @IBOutlet private weak var whiteLabel: UITextField!
+    @IBOutlet private weak var redLabel: UITextField!
+    @IBOutlet private weak var notesLabel: UITextView!
+    @IBOutlet private weak var saveButton: UIBarButtonItem!
     
-    @IBOutlet weak var dateLabel: UITextField!
-    @IBOutlet weak var starterLabel: UITextField!
+    @IBAction func unwindFromitemListTableViewController (segue: UIStoryboardSegue) {
+        // do nothing for the time being
+    }
     
-    @IBOutlet weak var mainLabel: UITextField!
-    
-    @IBOutlet weak var dessertLabel: UITextField!
-    
-    @IBOutlet weak var appertiveLabel: UITextField!
-    
-    @IBOutlet weak var whiteLabel: UITextField!
-    
-    @IBOutlet weak var redLabel: UITextField!
-    
-    
-    
-    @IBOutlet weak var notesLabel: UITextView!
-    
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBAction func textEditingChanged (_ sender: UITextField) {
+        updateSaveButtonStatus()
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    
         // update saveButton status
         updateSaveButtonStatus()
-        
-    
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-//
-//    // MARK: - Table view data source
-//
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    
+    
+    // MARK: - Navigation
+    
+    // Navigate when an accessoryButton is tapped
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
      let categorySelectedIndex = 3 * (indexPath.section - 1) + (indexPath.row)
@@ -122,10 +60,8 @@ class DinnerDetailTableViewController: UITableViewController {
         performSegue(withIdentifier: "itemListSegue", sender: nil)
     }
 
+    // Preparation before segue
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "itemListSegue" {
             let destinationVc = segue.destination as? UINavigationController
@@ -140,17 +76,12 @@ class DinnerDetailTableViewController: UITableViewController {
             endVc.dinner = dinner
                 }
             }
-    @IBAction func unwindFromitemListTableViewController (segue: UIStoryboardSegue) {
-        // do nothing for the time being
-    }
 
-    @IBAction func textEditingChanged (_ sender: UITextField) {
-        updateSaveButtonStatus()
-    }
 }
     // MARK - Helper functions
 extension DinnerDetailTableViewController {
-    func updateSaveButtonStatus () {
+    
+   private func updateSaveButtonStatus() {
         let friendsText = friendsLabel.text ?? ""
         let dateText = dateLabel.text ?? ""
         let mainText = mainLabel.text ?? ""

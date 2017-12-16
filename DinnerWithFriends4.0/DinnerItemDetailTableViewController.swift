@@ -12,23 +12,26 @@ import  SafariServices
 
 class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    // MARK: - API properties
     var managedContext : NSManagedObjectContext!
     var item : DinnerItem?
     var itemSelected : String = ""
     var newItem : Bool = false // becomes true if user wants to create a new DinnerItem
     
     // MARK: - Outlets
-    @IBOutlet weak var pictureLabel: UIImageView!
-    @IBOutlet weak var nameLabel: UITextField!
-    @IBOutlet weak var categoryLabel: UITextField!
-    @IBOutlet weak var urlLabel: UITextField!
-    @IBOutlet weak var ratingLabel: UITextField!
-    @IBOutlet weak var notesLabel: UITextView!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet private weak var pictureLabel: UIImageView!
+    @IBOutlet private weak var nameLabel: UITextField!
+    @IBOutlet private weak var categoryLabel: UITextField!
+    @IBOutlet private weak var urlLabel: UITextField!
+    @IBOutlet private weak var ratingLabel: UITextField!
+    @IBOutlet private weak var notesLabel: UITextView!
+    @IBOutlet private weak var saveButton: UIBarButtonItem!
     
-    @IBAction func textEditingChanged (_ sender: UITextField) {
+    // Check if minimum Name and Category field are filled in before Save is possible
+    @IBAction private func textEditingChanged (_ sender: UITextField) {
         updateSaveButtonStatus()
     }
+    
     // Select a picture
     @IBAction func pictureTapped(_ sender: Any) {
         let imagePicker = UIImagePickerController()
@@ -110,53 +113,6 @@ class DinnerItemDetailTableViewController: UITableViewController, UIImagePickerC
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
-  
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-     */
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         // still to implement, check if buttonTapped is the right one
         // if there is an item with an url, call safari with the url
